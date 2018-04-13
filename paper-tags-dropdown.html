@@ -267,6 +267,14 @@ Custom property | Description | Default
 	          value: 'right'
 	        },
 
+            /**
+            * Horizontal offset of the dropdown menu relative to the
+            * dropdown trigger.
+            */
+            horizontalOffset: {
+                type: Number,
+                value: 0,
+            },
 	        /**
 	         * The orientation against which to align the menu dropdown
 	         * vertically relative to the dropdown trigger.
@@ -501,7 +509,11 @@ Custom property | Description | Default
       // derived from the metrics of elements internal to `paper-input`'s
       // template. The metrics will change depending on whether or not the
       // input has a floating label.
-      return noLabelFloat ? -4 : 8;
+        if (this.verticalOffset) {
+          return this.verticalOffset;
+        } else {
+          return noLabelFloat ? -4 : 8;
+        }
     }
 
     /**
