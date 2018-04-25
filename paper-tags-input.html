@@ -175,7 +175,12 @@ class PaperTagsInput extends PaperTagsMixin(Polymer.Element) {
     	this.splice("items", 0);
   	}
 
-  	removeTag (tag) {
+
+    removeAll() {
+        this.splice("items", 0);
+    }
+
+    removeTag (tag) {
     	var position = this.items.indexOf(tag);
     	if(position > -1) {
       		this.splice('items', position, 1 );
