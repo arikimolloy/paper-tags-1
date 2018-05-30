@@ -19,7 +19,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
   <link rel="import" href="../../paper-dropdown-menu/paper-dropdown-menu.html">
   <link rel="import" href="../../paper-item/paper-item.html">
-  <link rel="import" href="../../paper-menu/paper-menu.html">
   <link rel="import" href="../paper-tags.html">
   <link rel="import" href="../paper-tags-input.html">
   <link rel="import" href="../paper-tags-dropdown.html">
@@ -59,9 +58,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <template  id="tagDropdown" is="dom-bind">
           <style is="custom-style">
           paper-tags-dropdown {
-            --paper-menu: {
-              width: 200px;
-            }
+
           }
           </style>
           <paper-tags-dropdown id="control" items="{{items}}" label-path="label" noink label="label dropdown" value-object='{"5": "true"}'></paper-tags-dropdown>
@@ -76,9 +73,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 			<template id="stringArrayTagDropdown" is="dom-bind">
 				<style is="custom-style">
 					paper-tags-dropdown {
-						--paper-menu: {
-							width: 200px;
-						}
 					}
 				</style>
 				<paper-tags-dropdown

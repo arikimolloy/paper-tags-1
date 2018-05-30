@@ -109,7 +109,7 @@ Custom property | Description | Default
 	          notify: true,
 			  observer: '_observeValueArray'
 	        },
-	
+
 	        /**
 	         * `valueArray` store value as array `["value1", "value2"]`
 	         */
@@ -117,55 +117,55 @@ Custom property | Description | Default
 	          type: Array,
 	          notify: true,
 	        },
-	
+
 	        keyPath: {
 	          type: String,
 	          value: 'id'
 	        },
-	
+
 	        labelPath: {
 	          type: String,
 	          value: 'label'
 	        },
-	
-	
+
+
 	        searchString: {
 	          type: String,
 	          value: ''
 	        },
-	
+
 	        items: {
 	          type: Array,
 	          value: function() {
 	            return [];
 	          }
 	        },
-	
+
 	        tagItems: {
 	          type: Array
 	        },
-	
+
 	        /**
 	         * When true, `showCounter` display a counter counting the number of tags
 	         */
 	        showCounter: {
 	          type: String
 	        },
-	
+
 	        /*
 	         * `maxTags` the maximum allowed number of tags
 	         */
 	        maxTags: {
 	          type: Number
 	        },
-	
+
 	        /*
 	         * `minTags` the minimum allowed number of tags
 	         */
 	        minTags: {
 	          type: Number
 	        },
-	
+
 	        /*
 	         * `readonly` - reflects to `disabled` when set to true.
 	         */
@@ -173,21 +173,21 @@ Custom property | Description | Default
 	          type: Boolean,
 	          observer: '_observeReadonly'
 	        },
-	
+
 	        /**
 	         * `tagTpl` a template Object used when creating new tags (e.g. '{"id":null, "label":"hello"}'). If not defuned, new tags will jus be Strings
 	         */
 	        tagTpl: {
 	          type: Object
 	        },
-	
+
 	        keyTarget: {
 	          type: Object,
 	          value: function() {
 	            return this.$.tagInput;
 	          }
 	        },
-	
+
 	        /**
 	         * The derived "label" of the currently selected item. This value
 	         * is the `label` property on the selected item if set, or else the
@@ -198,28 +198,28 @@ Custom property | Description | Default
 	          notify: true,
 	          readOnly: true
 	        },
-	
+
 	        /**
 	         * The label for the dropdown.
 	         */
 	        label: {
 	          type: String
 	        },
-	
+
 	        /**
 	         * The placeholder for the dropdown.
 	         */
 	        placeholder: {
 	          type: String
 	        },
-	
+
 	        /**
 	         * The error message to display when invalid.
 	         */
 	        errorMessage: {
 	          type: String
 	        },
-	
+
 	        /**
 	         * True if the dropdown is open. Otherwise, false.
 	         */
@@ -229,7 +229,7 @@ Custom property | Description | Default
 	          value: false,
 	          observer: '_openedChanged'
 	        },
-	
+
 	        /**
 	         * Set to true to disable the floating label. Bind this to the
 	         * `<paper-input-container>`'s `noLabelFloat` property.
@@ -239,7 +239,7 @@ Custom property | Description | Default
 	          value: false,
 	          reflectToAttribute: true
 	        },
-	
+
 	        /**
 	         * Set to true to always float the label. Bind this to the
 	         * `<paper-input-container>`'s `alwaysFloatLabel` property.
@@ -248,7 +248,7 @@ Custom property | Description | Default
 	          type: Boolean,
 	          value: false
 	        },
-	
+
 	        /**
 	         * Set to true to disable animations when opening and closing the
 	         * dropdown.
@@ -257,7 +257,7 @@ Custom property | Description | Default
 	          type: Boolean,
 	          value: false
 	        },
-	
+
 	        /**
 	         * The orientation against which to align the menu dropdown
 	         * horizontally relative to the dropdown trigger.
@@ -266,7 +266,7 @@ Custom property | Description | Default
 	          type: String,
 	          value: 'right'
 	        },
-	
+
 	        /**
 	         * The orientation against which to align the menu dropdown
 	         * vertically relative to the dropdown trigger.
@@ -274,11 +274,20 @@ Custom property | Description | Default
 	        verticalAlign: {
 	          type: String,
 	          value: 'top'
-	        }
+	        },
+
+          /**
+           * Vertical offset of the dropdown menu relative to the
+           * dropdown trigger.
+           */
+          verticalOffset: {
+            type: Number,
+            value: 0,
+          }
 		}
 	}
-	
-	
+
+
 	static get listeners() {
 	     return {
 		 'tap': '_onTap'
@@ -288,7 +297,7 @@ Custom property | Description | Default
 	     return{
 		 'up down': 'open',
 		  'esc': 'close'
-		 
+
 		}
 	}
 	static get hostAttributes() {
@@ -296,11 +305,11 @@ Custom property | Description | Default
 			role: 'combobox',
 		  'aria-autocomplete': 'none',
 		  'aria-haspopup': 'true'
-		}	
+		}
 	}
-	
-	
-	
+
+
+
 	static get observers() {
 	     return [
 		 '_observeItems(items)',
@@ -325,7 +334,7 @@ Custom property | Description | Default
 	  if (items) {
 	    this._isInitiatingItems = true;
 	    this.set('tagItems', this._filterValueItems(this.valueArray));
-	
+
 	    delete this._isInitiatingItems;
 	  }
 	}
@@ -503,7 +512,7 @@ Custom property | Description | Default
     _getValidity(_value) {
       return this.disabled || !this.required || (this.required && !!this.value);
     }
-     
+
     _openedChanged() {
       var openState = this.opened ? 'true' : 'false';
       var e = this.contentElement;

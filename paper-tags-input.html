@@ -138,8 +138,8 @@ class PaperTagsInput extends PaperTagsMixin(Polymer.Element) {
 	  }
 	}
 	static get observers() {
-	     return [
-		 '_observeTagItemsInit(items)',
+    	return [
+		  '_observeTagItemsInit(items)',
 		  '_observeTagItems(items.splices)'
 		]
 	}
@@ -168,10 +168,19 @@ class PaperTagsInput extends PaperTagsMixin(Polymer.Element) {
 	}
 
 	_removeLast() {
-	  var last = this.items.pop();
-	  this.items = this.items.slice();
-	  // this.fire('tag-removed', last);
+    	this.splice('items', this.items.length - 1);
 	}
+
+  	removeAll () {
+    	this.splice("items", 0);
+  	}
+
+  	removeTag (tag) {
+    	var position = this.items.indexOf(tag);
+    	if(position > -1) {
+      		this.splice('items', position, 1 );
+    	}
+  	}
 
 	findTag(tag) {
 	  return this.items.includes(tag);
@@ -211,7 +220,7 @@ class PaperTagsInput extends PaperTagsMixin(Polymer.Element) {
 	/**
 	 * Returns a reference to the focusable element.
 	 */
-	get _focusableElement() {
+	get_focusableElement() {
 	  return this.$.tagInput.inputElement;
 	}
 
