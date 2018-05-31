@@ -73,8 +73,8 @@ Custom property | Description | Default
     </style>
     <!-- this div fulfills an a11y requirement for combobox, do not remove -->
     <div role="button"></div>
-    <paper-menu-button id="menuButton" vertical-align="[[verticalAlign]]" horizontal-align="[[horizontalAlign]]" vertical-offset="[[_computeMenuVerticalOffset(noLabelFloat)]]" disabled="[[disabled]]" no-animations="[[noAnimations]]" opened="{{opened}}">
-      <div class="dropdown-trigger">
+    <paper-menu-button id="menuButton" vertical-align="[[verticalAlign]]" horizontal-align="[[horizontalAlign]]" horizontal-offset="[[horizontalOffset]]" vertical-offset="[[_computeMenuVerticalOffset(noLabelFloat, verticalOffset)]]" disabled="[[disabled]]" no-animations="[[noAnimations]]" opened="{{opened}}">
+      <div slot="dropdown-trigger">
         <paper-ripple></paper-ripple>
         <!-- paper-input has type="text" for a11y, do not remove -->
         <iron-a11y-keys id="a11y" target="[[keyTarget]]" keys="[[_computeKeys()]]" on-keys-pressed="_onAscii"></iron-a11y-keys>
@@ -82,7 +82,7 @@ Custom property | Description | Default
           <iron-icon icon="paper-dropdown-menu:arrow-drop-down" suffix></iron-icon>
         </paper-tags-input>
       </div>
-      <paper-listbox class="dropdown-content" disabled="[[disabled]]" selected-values="{{valueArray}}" attr-for-selected="name" multi>
+      <paper-listbox slot="dropdown-content" disabled="[[disabled]]" selected-values="{{valueArray}}" attr-for-selected="name" multi>
         <div id="filterCt" hidden$="[[!searchString]]">
           <span>filter:  {{searchString}}</span>
         </div>
@@ -90,11 +90,11 @@ Custom property | Description | Default
           <paper-item name="[[_computeItemValue(item, keyPath)]]">[[_computeItemLabel(item, labelPath)]]</paper-item>
         </template>
       </paper-listbox>
-      <content id="content" select=".dropdown-content"></content>
+      <content id="content" slot="dropdown-content"></content>
     </paper-menu-button>
   </template>
   <script>
-  class PaperTagsDropdown extends Polymer.mixinBehaviors([Polymer.IronValidatorBehavior,Polymer.IronFormElementBehavior, Polymer.IronButtonState,Polymer.IronControlState],Polymer.Element) {
+  class PaperTagsDropdown extends Polymer.mixinBehaviors([Polymer.IronValidatableBehavior,Polymer.IronFormElementBehavior, Polymer.IronButtonState,Polymer.IronControlState],Polymer.Element) {
 	static get is() {
 	    return 'paper-tags-dropdown'
 	}

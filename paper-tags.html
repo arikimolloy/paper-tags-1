@@ -127,6 +127,7 @@ class PaperTags extends PaperTagsMixin(Polymer.Element) {
 	}
 	
 	_removeTag(event) {
+	  var self = this;
 	  if (this.readonly) {
 	    return;
 	  }
@@ -137,7 +138,7 @@ class PaperTags extends PaperTagsMixin(Polymer.Element) {
 	  if (index > -1) {
 	    event.stopPropagation();
 	    var remove_func = function() {
-		      this.splice('items', index, 1);
+		      self.splice('items', index, 1);
 	    };
 	    this._paper_tag_remove_item = Polymer.Debouncer.debounce(
 	       this._paper_tag_remove_item, // initially undefined
