@@ -125,7 +125,7 @@ Custom property | Description | Default
 
 	        labelPath: {
 	          type: String,
-	          value: 'label'
+	          value: ''
 	        },
 
 
@@ -183,9 +183,9 @@ Custom property | Description | Default
 
 	        keyTarget: {
 	          type: Object,
-	          value: function() {
-	            return this.$.tagInput;
-	          }
+	          // value: function() {
+	          //   return this.$.tagInput;
+	          // }
 	        },
 
 	        /**
@@ -374,6 +374,7 @@ Custom property | Description | Default
 		if(super.connectedCallback){
 			super.connectedCallback();
 		}
+		this.keyTarget = this.$.tagInput;
 		// NOTE(cdata): Due to timing, a preselected value in a `IronSelectable`
 		// child will cause an `iron-select` event to fire while the element is
 		// still in a `DocumentFragment`. This has the effect of causing
@@ -411,10 +412,11 @@ Custom property | Description | Default
     }
 
     _computeItemLabel(item, labelPath) {
-      var parts = Polymer.Base._getPathParts(labelPath);
-      if (parts.length === 1) {
-        return item[labelPath] || item;
+      if (!labelPath) {
+      	return item;
       }
+
+      var parts = labelPath.split(".");
       var label = item;
       parts.forEach(function(p) {
         if (label) {
@@ -422,7 +424,6 @@ Custom property | Description | Default
         }
       });
       return label;
-
     }
 
     _computeKeys() {
@@ -441,15 +442,16 @@ Custom property | Description | Default
         return null;
       }
       string = string.toLowerCase();
-
-      var me = this;
       var labelPath = this.labelPath;
-      var parts = Polymer.Base._getPathParts(labelPath);
-      if (parts.length === 1) {
-        return function(item) {
-          return item[labelPath] && item[labelPath].toLowerCase().indexOf(string) > -1;
-        };
+
+      if (!labelPath) {
+      	return function(item) {
+      		return item && item.toLowerCase().indexOf(string) > -1;
+      	};
       }
+
+      var parts = labelPath.split('.');
+
       return function(item) {
         var label = item;
         parts.forEach(function(p) {
