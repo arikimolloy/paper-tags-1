@@ -41,28 +41,34 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <h4>paper-tags-input</h4>
     <demo-snippet class="centered-demo">
       <template>
-        <template  is="dom-bind">
-          <paper-tags-input id="control" label="input label" show-counter="tags" items='["hello", "new"]' value="{{value}}" value-join="{{valueJoin}}" maxLength="10"></paper-tags-input>
-          <div>
-            <div>value: {{valueJoin}}</div>
-            <div>input value: {{value}}</div>
-          </div>
-        </template>
+        <dom-bind>
+          <template>
+            <paper-tags-input id="control" label="input label" show-counter="tags" items='["hello", "new"]' value="{{value}}" value-join="{{valueJoin}}" maxLength="10"></paper-tags-input>
+            <div>
+              <div>value: {{valueJoin}}</div>
+              <div>input value: {{value}}</div>
+            </div>
+          </template>
+        </dom-bind>
       </template>
     </demo-snippet>
   </div>
   <div class="vertical-section-container centered">
     <h4>paper-tags-dropdown</h4>
     <demo-snippet class="centered-demo">
-      <template>
-        <template  id="tagDropdown" is="dom-bind">
-          <style is="custom-style">
-          paper-tags-dropdown {
-
-          }
-          </style>
-          <paper-tags-dropdown id="control" items="{{items}}" label-path="label" noink label="label dropdown" value-object='{"5": "true"}'></paper-tags-dropdown>
-        </template>
+        <template>
+          <dom-bind>
+            <template  class="tagContainer">
+              <style is="custom-style">
+              paper-tags-dropdown {
+                --paper-menu: {
+                  width: 200px;
+                }
+              }
+              </style>
+              <paper-tags-dropdown id="control" items="{{items}}" label-path="label" noink label="label dropdown" value-object='{"5": "true"}'></paper-tags-dropdown>
+            </template>
+          </dom-bind>
       </template>
     </demo-snippet>
   </div>
@@ -70,27 +76,32 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	<h4>paper-tags-dropdown string array</h4>
 	<demo-snippet class="centered-demo">
 		<template>
-			<template id="stringArrayTagDropdown" is="dom-bind">
-				<style is="custom-style">
-					paper-tags-dropdown {
-					}
-				</style>
-				<paper-tags-dropdown
-					id="stringControl"
-					items='["Doe", "Rae", "Mee", "Faa", "So", "Laa", "Tee", "Daa"]'
-					label-path="label"
-					noink
-					label="label dropdown"
-					value-array='["Rae"]'>
-				</paper-tags-dropdown>
-			</template>
+      <dom-bind>
+  			<template class="tagContainer">
+  				<style is="custom-style">
+  					paper-tags-dropdown {
+              --paper-menu: {
+                width: 200px;
+              }
+  					}
+  				</style>
+  				<paper-tags-dropdown
+  					id="control"
+  					items='["Doe", "Rae", "Mee", "Faa", "So", "Laa", "Tee", "Daa"]'
+  					label-path="label"
+  					noink
+  					label="label dropdown"
+  					value-array='["Rae"]'>
+  				</paper-tags-dropdown>
+  			</template>
+      </dom-bind>
 		</template>
 	</demo-snippet>
   </div>
   <script>
   window.addEventListener('WebComponentsReady', function() {
 
-    tagDropdown = document.querySelector('#tagDropdown');
+    var paperDropdowns = document.querySelectorAll("paper-tags-dropdown");
     // app.listenSelect = function(e) {
     //   console.info('Listed', e);
     // }
@@ -112,18 +123,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       desc: 'description 4',
       label: 'Bar'
     }];
-    setTimeout(function() {
-      tagDropdown.$.control.set('items', data)
-    }, 100);
 
-    tagDropdown.$.control.addEventListener('tag-removed', function(e, d) {
-      console.log("tag-removed", e.detail);
-    }.bind(this));
+    paperDropdowns.forEach(function(item) {
+      setTimeout(function() {
+        item.set('items', data)
+      }, 100);
 
-    tagDropdown.$.control.addEventListener('tag-added', function(e, d) {
-      console.log("tag-added", e.detail);
-    }.bind(this));
-  });
+      item.addEventListener('tag-removed', function(e, d) {
+        console.log("tag-removed", e.detail);
+      }.bind(this));
+
+      item.addEventListener('tag-added', function(e, d) {
+        console.log("tag-added", e.detail);
+      }.bind(this));
+
+      });
+    });
   </script>
 </body>
 
