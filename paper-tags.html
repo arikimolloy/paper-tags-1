@@ -84,7 +84,7 @@ Custom property | Description | Default
       <div class$="paper-tag-item [[_computeClass(item, classAccessor)]]">
         <span class="paper-tag-item-label">[[_computeLabel(item, labelPath)]]</span>
         <paper-icon-button icon="icons:close" hidden$="[[preventRemoveTag]]" on-tap="_removeTag"></paper-icon-button>
-        <paper-icon-button icon="[[_computeIcon(item, iconAccessor)]]" hidden$="[[!preventRemoveTag]]"></paper-icon-button>
+        <paper-icon-button icon="[[_computeIcon(item, iconAccessor)]]" hidden$="[[_isHidden(preventRemoveTag, iconAccessor)]]"></paper-icon-button>
       </div>
     </template>
   </template>
@@ -96,11 +96,6 @@ class PaperTags extends PaperTagsMixin(Polymer.Element) {
 	}
 	static get properties() {
 	    return {
-		    /**
-		     * `readonly`prevents tags to be removed
-		     */
-		    readonly: Boolean,
-		    
 		    /**
 		     * `items` the Array of tags
 		     */
@@ -126,6 +121,16 @@ class PaperTags extends PaperTagsMixin(Polymer.Element) {
 	  return item[labelPath] || item;
 	}
 	
+	_isHidden(preventRemoveTag, iconAccessor) {
+		if (!preventRemoveTag) {
+			return true;
+		} else if (preventRemoveTag && iconAccessor) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
 	_removeTag(event) {
 	  var self = this;
 	  if (this.readonly) {
