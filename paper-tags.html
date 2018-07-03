@@ -80,7 +80,7 @@ Custom property | Description | Default
     display: inline-block;
   }
   </style>
-    <template is="dom-repeat" id="tagRepeat" items="[[items]]">
+    <template is="dom-repeat" id="tagRepeat" items="[[items]]" mutable-data>
       <div class$="paper-tag-item [[_computeClass(item, classAccessor)]]">
         <span class="paper-tag-item-label">[[_computeLabel(item, labelPath)]]</span>
         <paper-icon-button icon="icons:close" hidden$="[[preventRemoveTag]]" on-tap="_removeTag"></paper-icon-button>
@@ -90,7 +90,7 @@ Custom property | Description | Default
   </template>
 </dom-module>
 <script>
-class PaperTags extends PaperTagsMixin(Polymer.Element) {
+class PaperTags extends Polymer.MutableData(PaperTagsMixin(Polymer.Element)) {
 	static get is() {
 	    return 'paper-tags'
 	}
