@@ -28,7 +28,7 @@
     "url": "https://github.com/AlexanderYZhang/paper-tags.git"
   },
   "dependencies": {
-    "polymer": "^2.0.0",
+    "polymer": "Polymer/polymer#^2.0.0",
     "paper-input": "^2.0.0",
     "paper-badge": "^2.0.0",
     "paper-icon-button": "^2.0.0",
