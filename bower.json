@@ -1,6 +1,6 @@
 {
   "name": "paper-tags",
-  "version": "1.4.2",
+  "version": "2.0.0",
   "authors": [
     "christophe.geiser <christophe.geiser@e-smile.org>"
   ],
@@ -28,7 +28,7 @@
 	  "url": "https://github.com/AlexanderYZhang/paper-tags.git"
   },
   "dependencies": {
-    "polymer": "Polymer/polymer#^2.0.0",
+    "polymer": "^2.0.0",
     "paper-input": "PolymerElements/paper-input#^2.0.0",
     "paper-badge": "PolymerElements/paper-badge#^2.0.0",
     "paper-icon-button": "PolymerElements/paper-icon-button#^2.0.0",
